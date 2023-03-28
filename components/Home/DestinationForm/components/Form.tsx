@@ -1,20 +1,22 @@
 export default function Form() {
   return (
-    <div>
+    <div className="">
       <form action="">
-        <div className="from">
-          <label htmlFor="from">From</label>
-          <input type="text" name="from" id="from" />
+        <div className=" flex justify-between">
+          <div className="from flex flex-col w-[200px]">
+            <label htmlFor="from">From</label>
+            <input className=" outline-none rounded-sm p-2 border-[1px] border-gray-500" type="text" name="from" id="from" />
+          </div>
+
+          <div className="to flex flex-col w-[200px]">
+            <label htmlFor="to">To</label>
+            <input className=" outline-none rounded-sm p-2 border-[1px] border-gray-500" type="text" name="to" id="to" />
+          </div>
         </div>
 
-        <div className="to">
-          <label htmlFor="to">To</label>
-          <input type="text" name="to" id="to" />
-        </div>
-
-        <div className="date">
+        <div className="date flex flex-col w-[200px] mt-2">
           <label htmlFor="date">Date</label>
-          <input type="date" name="date" id="date" />
+          <input className="outline-none rounded-sm p-2 border-[1px] border-gray-500" type="date" name="date" id="date" />
         </div>
       </form>
     </div>
