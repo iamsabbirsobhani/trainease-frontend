@@ -11,7 +11,7 @@ export const metadata = {
   openGraph: {
     title: 'TrainEase Online Ticket Booking',
     images:
-      'https://firebasestorage.googleapis.com/v0/b/general-eadd6.appspot.com/o/trainease%2Ftrainease-og-image.svg?alt=media&token=01d993ef-6caf-4e36-9c4a-eff8cc439ace',
+      'https://firebasestorage.googleapis.com/v0/b/general-eadd6.appspot.com/o/trainease%2FAsset%205.png?alt=media&token=b7957d5a-88fc-439f-9070-559f0c08aba6',
     description:
       'TrainEase offers online train ticket booking services. Book your train tickets online and save time and money.',
     url: 'https://trainease-frontend.vercel.app/',
@@ -19,7 +19,7 @@ export const metadata = {
   twitter: {
     title: 'TrainEase Online Ticket Booking',
     images:
-      'https://firebasestorage.googleapis.com/v0/b/general-eadd6.appspot.com/o/trainease%2Ftrainease-og-image.svg?alt=media&token=01d993ef-6caf-4e36-9c4a-eff8cc439ace',
+      'https://firebasestorage.googleapis.com/v0/b/general-eadd6.appspot.com/o/trainease%2FAsset%205.png?alt=media&token=b7957d5a-88fc-439f-9070-559f0c08aba6',
     description:
       'TrainEase offers online train ticket booking services. Book your train tickets online and save time and money.',
     card: 'summary_large_image',
