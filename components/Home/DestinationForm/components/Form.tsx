@@ -106,6 +106,8 @@ export default function Form() {
             value={date}
             onChange={(e) => handleDate(e)}
             showIcon
+            icon="pi pi-calendar"
+            className=""
           />
         </div>
       </form>
