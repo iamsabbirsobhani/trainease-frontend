@@ -79,7 +79,7 @@ export default function Form() {
             />
           </div>
 
-          <div className="flex justify-center items-center relative bg-blue-500 rounded-full w-[35px] h-[35px] text-white mt-3 shadow-md">
+          <div className="flex justify-center items-center relative bg-sky-700 rounded-full w-[35px] h-[35px] text-white mt-3 shadow-md">
             <SwapHorizIcon/>
           </div>
 
@@ -117,7 +117,7 @@ export default function Form() {
         </div>
 
         <div className=' text-center mt-3'>
-          <button className=' font-bold bg-blue-600 w-[200px] p-2 text-white rounded-sm shadow-sm'>Get times & tickets</button>
+          <button className=' font-bold bg-sky-700 w-[200px] p-2 text-white rounded-sm shadow-sm'>Get times & tickets</button>
         </div>
       </form>
     </div>
