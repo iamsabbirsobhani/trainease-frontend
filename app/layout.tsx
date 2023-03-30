@@ -8,6 +8,9 @@ export const metadata = {
   title: 'TrainEase Online Ticket Booking',
   description:
     'TrainEase offers online train ticket booking services. Book your train tickets online and save time and money.',
+  icons: {
+    icon: 'https://firebasestorage.googleapis.com/v0/b/general-eadd6.appspot.com/o/trainease%2Ftrain.png?alt=media&token=6f257144-154d-4a41-bf81-8390fd32f379',
+  },
   openGraph: {
     title: 'TrainEase Online Ticket Booking',
     images:
