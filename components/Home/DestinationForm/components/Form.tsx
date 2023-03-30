@@ -80,7 +80,7 @@ export default function Form() {
           </div>
 
           <div className="flex justify-center items-center relative bg-sky-700 rounded-full w-[35px] h-[35px] text-white mt-3 shadow-md">
-            <SwapHorizIcon/>
+            <SwapHorizIcon />
           </div>
 
           <div className="to flex flex-col w-[300px]">
@@ -102,7 +102,7 @@ export default function Form() {
           </div>
         </div>
 
-        <div className="date flex flex-col w-full mt-2">
+        <div className="date flex flex-col w-[300px] mt-2">
           <label htmlFor="date" className="text-lg font-semibold">
             Date
           </label>
