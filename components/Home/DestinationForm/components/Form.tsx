@@ -107,8 +107,12 @@ export default function Form() {
             onChange={(e) => handleDate(e)}
             showIcon
             icon="pi pi-calendar"
-            className=""
+            className=" h-[40px]"
           />
+        </div>
+
+        <div className=' text-center mt-3'>
+          <button className=' font-bold bg-blue-600 w-[200px] p-2 text-white rounded-sm shadow-sm'>Get times & tickets</button>
         </div>
       </form>
     </div>
