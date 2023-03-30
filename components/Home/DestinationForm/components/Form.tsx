@@ -4,6 +4,7 @@ import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
 import React, { useState } from 'react';
 import stationData from '@/public/stations.json';
 import { Calendar } from 'primereact/calendar';
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 
 // interface for the station also can be null
 interface Station {
@@ -59,7 +60,7 @@ export default function Form() {
   return (
     <div className="">
       <form action="">
-        <div className=" flex justify-between">
+        <div className=" flex justify-between items-center">
           <div className="from flex flex-col w-[300px]">
             <label htmlFor="from" className=" text-lg font-semibold">
               From
@@ -76,6 +77,10 @@ export default function Form() {
               selectionLimit={1}
               className="w-full md:w-20rem"
             />
+          </div>
+
+          <div className="flex justify-center items-center relative bg-blue-500 rounded-full w-[35px] h-[35px] text-white mt-3 shadow-md">
+            <SwapHorizIcon/>
           </div>
 
           <div className="to flex flex-col w-[300px]">
