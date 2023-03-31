@@ -12,6 +12,7 @@ export default function Navbar() {
             width={250}
             height={40}
             className=" relative left-5"
+            blurDataURL="https://firebasestorage.googleapis.com/v0/b/general-eadd6.appspot.com/o/trainease%2Ftrainease-logo_1.png?alt=media&token=a921799d-ad95-4956-ace5-d5baba9591c4"
           />
         </div>
 
