@@ -7,7 +7,7 @@ import { TextField } from '@mui/material';
 
 export default function Card() {
   return (
-    <div className="shadow-md rounded-lg w-[700px] mt-9 m-auto p-3 absolute top-[100px] bg-gray-50 left-[140px] right-0">
+    <div className="shadow-md rounded-lg w-[700px] mt-9 m-auto p-3 absolute top-[100px] bg-gray-50 left-0 right-0">
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <Form />
       </LocalizationProvider>
