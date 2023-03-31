@@ -69,7 +69,7 @@ export default function Home() {
             alt="Picture of the author"
             width={1920}
             height={1080}
-            className=" relative mt-16"
+            className=" absolute top-0 -z-10"
           />
         </div>
         <DestinationForm />
