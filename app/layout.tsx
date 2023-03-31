@@ -1,9 +1,5 @@
 import './globals.css';
-import 'primereact/resources/themes/md-light-indigo/theme.css';
 
-import 'primereact/resources/primereact.min.css';
-
-import 'primeicons/primeicons.css';
 export const metadata = {
   title: 'TrainEase Online Ticket Booking',
   description:

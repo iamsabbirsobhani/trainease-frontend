@@ -1,10 +1,9 @@
 'use client';
-
-import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
 import React, { useState } from 'react';
 import stationData from '@/public/stations.json';
-import { Calendar } from 'primereact/calendar';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
+import { Button, TextField } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 // interface for the station also can be null
 interface Station {
@@ -26,37 +25,6 @@ export default function Form() {
   const [citiesTo, setCitiesTo] = useState(stations);
   const [date, setDate] = useState<any>();
 
-  const handleFromCities = (e: MultiSelectChangeEvent) => {
-    setSelectedFromCities(e.value);
-
-    if (e.value && e.value.length > 0) {
-      const filteredCities = stations.filter(
-        (city) => (city && city.name) !== (e.value && e.value[0].name),
-      );
-      setCitiesTo(filteredCities);
-    } else {
-      setCitiesTo(stations);
-    }
-  };
-
-  const handleToCities = (e: MultiSelectChangeEvent) => {
-    setSelectedToCities(e.value);
-
-    if (e.value && e.value.length > 0) {
-      const filteredCities = stations.filter(
-        (city) => (city && city.name) !== (e.value && e.value[0].name),
-      );
-      setCitiesFrom(filteredCities);
-    } else {
-      setCitiesFrom(stations);
-    }
-  };
-
-  const handleDate = (e: any) => {
-    setDate(e.value);
-    console.log(e.value);
-  };
-
   return (
     <div className="">
       <form action="">
@@ -65,17 +33,11 @@ export default function Form() {
             <label htmlFor="from" className=" text-lg font-semibold">
               From
             </label>
-            <MultiSelect
-              name="from"
-              value={selectedFromCities}
-              onChange={(e) => handleFromCities(e)}
-              options={citiesFrom}
-              optionLabel="name"
-              filter
-              placeholder="Select Cities"
-              maxSelectedLabels={1}
-              selectionLimit={1}
-              className="w-full md:w-20rem"
+            <TextField
+              required
+              id="outlined-required"
+              label="Origin station"
+              defaultValue=""
             />
           </div>
 
@@ -87,17 +49,11 @@ export default function Form() {
             <label htmlFor="to" className="text-lg font-semibold">
               To
             </label>
-            <MultiSelect
-              name="to"
-              value={selectedToCities}
-              onChange={(e) => handleToCities(e)}
-              options={citiesTo}
-              optionLabel="name"
-              filter
-              placeholder="Select Cities"
-              maxSelectedLabels={1}
-              selectionLimit={1}
-              className="w-full md:w-20rem"
+            <TextField
+              required
+              id="outlined-required"
+              label="Destination station"
+              defaultValue=""
             />
           </div>
         </div>
@@ -106,18 +62,13 @@ export default function Form() {
           <label htmlFor="date" className="text-lg font-semibold">
             Date
           </label>
-          <Calendar
-            name="date"
-            value={date}
-            onChange={(e) => handleDate(e)}
-            showIcon
-            icon="pi pi-calendar"
-            className=" h-[40px]"
-          />
+          <DatePicker />
         </div>
 
-        <div className=' text-center mt-3'>
-          <button className=' font-bold bg-sky-700 w-[200px] p-2 text-white rounded-sm shadow-sm'>Get times & tickets</button>
+        <div className=" text-center mt-3">
+          <Button className="font-bold  w-[200px] p-2 shadow-sm bg-sky-700 text-white hover:bg-sky-900 rounded-md">
+            Get times & tickets
+          </Button>
         </div>
       </form>
     </div>
