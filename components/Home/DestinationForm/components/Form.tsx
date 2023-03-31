@@ -94,8 +94,11 @@ export default function Form() {
     <div className="">
       <form action="">
         <div className=" flex justify-between items-center">
-          <div className="from flex flex-col w-[300px]">
-            <label htmlFor="from" className=" text-lg font-semibold">
+          <div className="from flex flex-col w-[300px] mb-2">
+            <label
+              htmlFor="from"
+              className=" text-md font-semibold mb-2 text-gray-500"
+            >
               From
             </label>
             <StyledTextField
@@ -110,8 +113,11 @@ export default function Form() {
             <SwapHorizIcon />
           </div>
 
-          <div className="to flex flex-col w-[300px]">
-            <label htmlFor="to" className="text-lg font-semibold">
+          <div className="to flex flex-col w-[300px] mb-2">
+            <label
+              htmlFor="to"
+              className="text-md font-semibold mb-2 text-gray-500"
+            >
               To
             </label>
             <StyledTextField
@@ -123,8 +129,11 @@ export default function Form() {
           </div>
         </div>
 
-        <div className="date flex flex-col w-[300px] mt-2">
-          <label htmlFor="date" className="text-lg font-semibold">
+        <div className="date flex flex-col w-[300px] mt-2 mb-2">
+          <label
+            htmlFor="date"
+            className="text-md font-semibold mb-2 text-gray-500"
+          >
             Date
           </label>
           <StyledDatePicker />
