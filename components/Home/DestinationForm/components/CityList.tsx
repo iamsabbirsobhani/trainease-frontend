@@ -4,6 +4,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import { Station } from './Form';
+import { CircularProgress } from '@mui/material';
 
 interface Props {
   typingFrom: boolean;
@@ -13,6 +14,7 @@ interface Props {
     event: React.MouseEvent<HTMLDivElement>,
     index: number,
   ) => void;
+  cityLoading: boolean;
 }
 
 export default function CityList({
@@ -20,6 +22,7 @@ export default function CityList({
   citiesFrom,
   selectedIndex,
   handleListItemClick,
+  cityLoading,
 }: Props) {
   return (
     <>
@@ -47,6 +50,16 @@ export default function CityList({
                 <ListItemText primary={city.name} />
               </ListItemButton>
             ))}
+          {cityLoading && (
+            <CircularProgress
+              sx={{
+                position: 'relative',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+            />
+          )}
         </List>
       </Box>
     </>

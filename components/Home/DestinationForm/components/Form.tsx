@@ -1,11 +1,12 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import stationData from '@/public/stations.json';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { Button, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import styled from '@emotion/styled';
 import debounce from 'lodash/debounce';
+import { throttle } from 'lodash';
 import CityList from './CityList';
 
 export interface Station {
@@ -25,6 +26,7 @@ export default function Form() {
   const [selectedToCities, setSelectedToCities] = useState<Station[]>();
   const [citiesFrom, setCitiesFrom] = useState(stations);
   const [citiesTypingLetter, setcitiesTypingLetter] = useState('');
+  const [cityloading, setCityLoading] = useState(false);
   const [citiesTo, setCitiesTo] = useState(stations);
   const [date, setDate] = useState<any>();
   const [typingFrom, setTypingFrom] = useState(false);
@@ -94,9 +96,8 @@ export default function Form() {
     }
   `;
 
-  const handleFrom = (e: any): any => {
+  const handleFromQuery = (e: any): any => {
     const value = e.target.value;
-
     if (value === '') {
       setCitiesFrom(stations);
       setTypingFrom(false);
@@ -117,6 +118,7 @@ export default function Form() {
     }
 
     setCitiesFrom(filteredCities);
+    setCityLoading(false);
   };
 
   const handleListItemClick = (
@@ -127,6 +129,13 @@ export default function Form() {
     setcitiesTypingLetter(citiesFrom[index].name);
     console.log(citiesFrom[index]);
     setTypingFrom(false);
+  };
+
+  const query = debounce((e) => handleFromQuery(e), 2000);
+
+  const handleFrom = (e: any) => {
+    setCityLoading(true);
+    query(e);
   };
 
   return (
@@ -145,15 +154,13 @@ export default function Form() {
               id="outlined-required"
               label="Origin station"
               defaultValue={citiesTypingLetter}
-              onChange={(e) => {
-                const query = debounce(() => handleFrom(e), 2000);
-                query();
-              }}
+              onChange={handleFrom}
             />
 
             <CityList
               typingFrom={typingFrom}
               citiesFrom={citiesFrom}
+              cityLoading={cityloading}
               selectedIndex={selectedIndex}
               handleListItemClick={handleListItemClick}
             />
