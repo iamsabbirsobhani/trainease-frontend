@@ -1,12 +1,11 @@
 'use client';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import stationData from '@/public/stations.json';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { Button, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import styled from '@emotion/styled';
 import debounce from 'lodash/debounce';
-import { throttle } from 'lodash';
 import CityList from './CityList';
 
 export interface Station {
@@ -31,7 +30,7 @@ export default function Form() {
   const [date, setDate] = useState<any>();
   const [typingFrom, setTypingFrom] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(1);
-  const [notFound, setNotFound] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
   const StyledButton = styled(Button)`
     &.MuiButton-root {
@@ -101,7 +100,6 @@ export default function Form() {
     const value = e.target.value;
 
     if (value === '') {
-      // setCitiesFrom(stations);
       setTypingFrom(false);
       setcitiesTypingLetter('');
       setCityLoading(false);
