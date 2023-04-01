@@ -56,7 +56,10 @@ export default function CityList({
               ))
             : notFound === true && (
                 <ListItemButton>
-                  <ListItemText primary={notFoundMessage} />
+                  <ListItemText
+                    sx={{ color: '#f43f5e' }}
+                    primary={notFoundMessage}
+                  />
                 </ListItemButton>
               )}
           {cityLoading && (
