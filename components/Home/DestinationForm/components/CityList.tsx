@@ -16,6 +16,7 @@ interface Props {
   ) => void;
   cityLoading: boolean;
   notFound: boolean;
+  notFoundMessage: string;
 }
 
 export default function CityList({
@@ -25,6 +26,7 @@ export default function CityList({
   handleListItemClick,
   cityLoading,
   notFound,
+  notFoundMessage,
 }: Props) {
   return (
     <>
@@ -54,7 +56,7 @@ export default function CityList({
               ))
             : notFound === true && (
                 <ListItemButton>
-                  <ListItemText primary="No city found" />
+                  <ListItemText primary={notFoundMessage} />
                 </ListItemButton>
               )}
           {cityLoading && (

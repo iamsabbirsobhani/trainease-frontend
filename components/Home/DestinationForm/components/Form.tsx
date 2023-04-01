@@ -169,6 +169,7 @@ export default function Form() {
               cityLoading={cityloading}
               selectedIndex={selectedIndex}
               notFound={notFound}
+              notFoundMessage={`No station found for ${citiesTypingLetter}`}
               handleListItemClick={handleListItemClick}
             />
           </div>
