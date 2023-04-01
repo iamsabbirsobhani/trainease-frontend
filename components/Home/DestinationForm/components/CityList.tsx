@@ -15,6 +15,7 @@ interface Props {
     index: number,
   ) => void;
   cityLoading: boolean;
+  notFound: boolean;
 }
 
 export default function CityList({
@@ -23,6 +24,7 @@ export default function CityList({
   selectedIndex,
   handleListItemClick,
   cityLoading,
+  notFound,
 }: Props) {
   return (
     <>
@@ -40,23 +42,27 @@ export default function CityList({
       >
         <Divider />
         <List component="nav" aria-label="secondary mailbox folder">
-          {typingFrom &&
-            citiesFrom.map((city: Station, index: number) => (
-              <ListItemButton
-                key={index}
-                selected={selectedIndex === index}
-                onClick={(event) => handleListItemClick(event, index)}
-              >
-                <ListItemText primary={city.name} />
-              </ListItemButton>
-            ))}
+          {typingFrom && citiesFrom
+            ? citiesFrom.map((city: Station, index: number) => (
+                <ListItemButton
+                  key={index}
+                  selected={selectedIndex === index}
+                  onClick={(event) => handleListItemClick(event, index)}
+                >
+                  <ListItemText primary={city.name} />
+                </ListItemButton>
+              ))
+            : notFound === true && (
+                <ListItemButton>
+                  <ListItemText primary="No city found" />
+                </ListItemButton>
+              )}
           {cityLoading && (
             <CircularProgress
               sx={{
                 position: 'relative',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
+                left: '45%',
+                right: '50%',
               }}
             />
           )}

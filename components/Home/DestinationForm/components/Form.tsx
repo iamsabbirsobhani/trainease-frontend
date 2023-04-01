@@ -31,6 +31,7 @@ export default function Form() {
   const [date, setDate] = useState<any>();
   const [typingFrom, setTypingFrom] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(1);
+  const [notFound, setNotFound] = useState(true);
 
   const StyledButton = styled(Button)`
     &.MuiButton-root {
@@ -98,10 +99,13 @@ export default function Form() {
 
   const handleFromQuery = (e: any): any => {
     const value = e.target.value;
+
     if (value === '') {
-      setCitiesFrom(stations);
+      // setCitiesFrom(stations);
       setTypingFrom(false);
       setcitiesTypingLetter('');
+      setCityLoading(false);
+      setNotFound(false);
       return value;
     } else {
       setTypingFrom(true);
@@ -112,12 +116,14 @@ export default function Form() {
     });
 
     if (filteredCities.length === 0) {
-      setcitiesTypingLetter('');
+      setcitiesTypingLetter(value);
+      setNotFound(true);
+      setTypingFrom(false);
     } else {
       setcitiesTypingLetter(value);
+      setCitiesFrom(filteredCities);
     }
 
-    setCitiesFrom(filteredCities);
     setCityLoading(false);
   };
 
@@ -129,12 +135,14 @@ export default function Form() {
     setcitiesTypingLetter(citiesFrom[index].name);
     console.log(citiesFrom[index]);
     setTypingFrom(false);
+    setNotFound(false);
   };
 
   const query = debounce((e) => handleFromQuery(e), 2000);
+  const loadingQuery = debounce((e) => setCityLoading(true), 1000);
 
   const handleFrom = (e: any) => {
-    setCityLoading(true);
+    loadingQuery(e);
     query(e);
   };
 
@@ -154,7 +162,7 @@ export default function Form() {
               id="outlined-required"
               label="Origin station"
               defaultValue={citiesTypingLetter}
-              onChange={handleFrom}
+              onChange={(e) => handleFrom(e)}
             />
 
             <CityList
@@ -162,6 +170,7 @@ export default function Form() {
               citiesFrom={citiesFrom}
               cityLoading={cityloading}
               selectedIndex={selectedIndex}
+              notFound={notFound}
               handleListItemClick={handleListItemClick}
             />
           </div>
