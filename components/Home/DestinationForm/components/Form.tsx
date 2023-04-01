@@ -5,9 +5,10 @@ import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { Button, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import styled from '@emotion/styled';
+import debounce from 'lodash/debounce';
+import CityList from './CityList';
 
-// interface for the station also can be null
-interface Station {
+export interface Station {
   id: number;
   name: string;
   info?: string;
@@ -23,8 +24,11 @@ export default function Form() {
   const [selectedFromCities, setSelectedFromCities] = useState<Station[]>();
   const [selectedToCities, setSelectedToCities] = useState<Station[]>();
   const [citiesFrom, setCitiesFrom] = useState(stations);
+  const [citiesTypingLetter, setcitiesTypingLetter] = useState('');
   const [citiesTo, setCitiesTo] = useState(stations);
   const [date, setDate] = useState<any>();
+  const [typingFrom, setTypingFrom] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(1);
 
   const StyledButton = styled(Button)`
     &.MuiButton-root {
@@ -90,11 +94,46 @@ export default function Form() {
     }
   `;
 
+  const handleFrom = (e: any): any => {
+    const value = e.target.value;
+
+    if (value === '') {
+      setCitiesFrom(stations);
+      setTypingFrom(false);
+      setcitiesTypingLetter('');
+      return value;
+    } else {
+      setTypingFrom(true);
+    }
+
+    const filteredCities = stations.filter((city) => {
+      return city.name.toLowerCase().includes(value.toLowerCase());
+    });
+
+    if (filteredCities.length === 0) {
+      setcitiesTypingLetter('');
+    } else {
+      setcitiesTypingLetter(value);
+    }
+
+    setCitiesFrom(filteredCities);
+  };
+
+  const handleListItemClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number,
+  ) => {
+    setSelectedIndex(index);
+    setcitiesTypingLetter(citiesFrom[index].name);
+    console.log(citiesFrom[index]);
+    setTypingFrom(false);
+  };
+
   return (
     <div className="">
       <form action="">
         <div className=" flex justify-between items-center">
-          <div className="from flex flex-col w-[300px] mb-2">
+          <div className="from flex flex-col w-[300px] mb-2 relative">
             <label
               htmlFor="from"
               className=" text-md font-semibold mb-2 text-gray-500"
@@ -105,7 +144,18 @@ export default function Form() {
               required
               id="outlined-required"
               label="Origin station"
-              defaultValue=""
+              defaultValue={citiesTypingLetter}
+              onChange={(e) => {
+                const query = debounce(() => handleFrom(e), 2000);
+                query();
+              }}
+            />
+
+            <CityList
+              typingFrom={typingFrom}
+              citiesFrom={citiesFrom}
+              selectedIndex={selectedIndex}
+              handleListItemClick={handleListItemClick}
             />
           </div>
 
