@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Button from '@mui/material/Button';
+import Link from 'next/link';
 
 export default function Navbar() {
   return (
@@ -18,7 +19,9 @@ export default function Navbar() {
 
         <div className=" flex justify-between relative right-5">
           <div>
-            <Button>Sign In</Button>
+            <Link href="/login">
+              <Button>Sign In</Button>
+            </Link>
           </div>
           <div>
             <Button>Sign Up</Button>
