@@ -140,6 +140,7 @@ export default function Form() {
   const loadingQuery = debounce((e) => setCityLoading(true), 1000);
 
   const handleFrom = (e: any) => {
+    setcitiesTypingLetter(e.target.value);
     loadingQuery(e);
     query(e);
   };
@@ -155,11 +156,14 @@ export default function Form() {
             >
               From
             </label>
-            <StyledTextField
+
+            <input
+              type="text"
               required
               id="outlined-required"
-              label="Origin station"
-              defaultValue={citiesTypingLetter}
+              placeholder="Origin station"
+              className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-700 focus:border-transparent"
+              value={citiesTypingLetter}
               onChange={(e) => handleFrom(e)}
             />
 
