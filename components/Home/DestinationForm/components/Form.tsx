@@ -141,6 +141,7 @@ export default function Form() {
 
   const handleFrom = (e: any) => {
     setcitiesTypingLetter(e.target.value);
+
     loadingQuery(e);
     query(e);
   };
@@ -167,15 +168,27 @@ export default function Form() {
               onChange={(e) => handleFrom(e)}
             />
 
-            <CityList
-              typingFrom={typingFrom}
-              citiesFrom={citiesFrom}
-              cityLoading={cityloading}
-              selectedIndex={selectedIndex}
-              notFound={notFound}
-              notFoundMessage={`No station found for "${citiesTypingLetter}"`}
-              handleListItemClick={handleListItemClick}
-            />
+            {typingFrom ? (
+              <CityList
+                typingFrom={typingFrom}
+                citiesFrom={citiesFrom}
+                cityLoading={cityloading}
+                selectedIndex={selectedIndex}
+                notFound={notFound}
+                notFoundMessage={`No station found for "${citiesTypingLetter}"`}
+                handleListItemClick={handleListItemClick}
+              />
+            ) : notFound ? (
+              <CityList
+                typingFrom={typingFrom}
+                citiesFrom={citiesFrom}
+                cityLoading={cityloading}
+                selectedIndex={selectedIndex}
+                notFound={notFound}
+                notFoundMessage={`No station found for "${citiesTypingLetter}"`}
+                handleListItemClick={handleListItemClick}
+              />
+            ) : null}
           </div>
 
           <div className="flex justify-center items-center relative bg-sky-700 rounded-full w-[35px] h-[35px] text-white mt-3 shadow-md">
