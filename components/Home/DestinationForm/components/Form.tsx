@@ -12,6 +12,7 @@ import { API } from '@/api';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { RootState } from '@/store';
 import { selectRoute } from '@/features/activities/activitiesSlice';
+import { startOfToday, addDays } from 'date-fns';
 
 export interface Station {
   id: number;
@@ -20,6 +21,9 @@ export interface Station {
 }
 
 export default function Form() {
+  const now = startOfToday();
+  const future = addDays(now, 5);
+
   const stations: Station[] = stationData.map((station: any) => ({
     id: station.id,
     name: station.name,
@@ -272,11 +276,11 @@ export default function Form() {
           >
             Date
           </label>
-          <StyledDatePicker />
+          <StyledDatePicker maxDate={future} minDate={now} />
         </div>
 
         <div className=" text-center mt-3">
-          <StyledButton>Get times & tickets</StyledButton>
+          <StyledButton type="submit">Get times & tickets</StyledButton>
         </div>
       </form>
     </div>
