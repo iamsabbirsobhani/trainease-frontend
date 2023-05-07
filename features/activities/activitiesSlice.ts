@@ -1,23 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface UiState {
-  selectedRoutes: string[];
+interface ActivitiesSlice {
+  selectedRoutes: any;
 }
 
-const initialState: UiState = {
+const initialState: ActivitiesSlice = {
   selectedRoutes: [],
 };
 
-export const uiSlice = createSlice({
+export const ActivitiesSlice = createSlice({
   name: 'ui',
   initialState,
   reducers: {
-    selectRoute: (state, action: PayloadAction<string>) => {
-      state.selectedRoutes.push(action.payload);
+    selectRoute: (state, action: PayloadAction<any>) => {
+      state.selectedRoutes = action.payload;
     },
   },
 });
 
-export const { selectRoute } = uiSlice.actions;
+export const { selectRoute } = ActivitiesSlice.actions;
 
-export default uiSlice.reducer;
+export default ActivitiesSlice.reducer;

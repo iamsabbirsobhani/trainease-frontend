@@ -9,6 +9,9 @@ import debounce from 'lodash/debounce';
 import CityList from './CityList';
 import axios from 'axios';
 import { API } from '@/api';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
+import { RootState } from '@/store';
+import { selectRoute } from '@/features/activities/activitiesSlice';
 
 export interface Station {
   id: number;
@@ -23,6 +26,12 @@ export default function Form() {
     info: station.info,
   }));
 
+  const selectedRoutes = useSelector(
+    (state: RootState) => state.activities.selectedRoutes,
+  );
+
+  const dispatch = useDispatch();
+
   const [selectedFromCities, setSelectedFromCities] = useState<Station[]>();
   const [selectedToCities, setSelectedToCities] = useState<Station[]>();
   const [citiesFrom, setCitiesFrom] = useState(stations);
@@ -33,6 +42,7 @@ export default function Form() {
   const [typingFrom, setTypingFrom] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(1);
   const [notFound, setNotFound] = useState(false);
+  const [isSelected, setisSelected] = useState<boolean>(false);
 
   const StyledButton = styled(Button)`
     &.MuiButton-root {
@@ -132,16 +142,22 @@ export default function Form() {
       const stations = await axios.get(
         API + `/getselectedstationsroute/fromstation/${fromStation}`,
       );
-    } catch (error) {}
+      if (stations.data) setisSelected(true);
+      dispatch(selectRoute(stations.data));
+    } catch (error) {
+      console.log(error);
+      setisSelected(false);
+    }
   };
 
-  const handleListItemClick = (
+  const handleListItemClick = async (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,
   ) => {
     setSelectedIndex(index);
     setcitiesTypingLetter(citiesFrom[index].name);
-    console.log(citiesFrom[index]);
+    // console.log(citiesFrom[index]);
+    await getSelectedStationsRoute(citiesFrom[index].name);
     setTypingFrom(false);
     setNotFound(false);
   };
@@ -151,7 +167,7 @@ export default function Form() {
 
   const handleFrom = (e: any) => {
     setcitiesTypingLetter(e.target.value);
-
+    if (citiesTypingLetter) setisSelected(false);
     loadingQuery(e);
     query(e);
   };
@@ -212,18 +228,40 @@ export default function Form() {
             >
               To
             </label>
-            <select
-              id="stations"
-              className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-700 focus:border-transparent appearance-none"
-              disabled
-            >
-              <option value="">Select a station</option>
-              <option value="volvo" className="">
-                Rangpur
-              </option>
-              <option value="saab">Kamalapur</option>
-              <option value="vw">Biman_Bandar</option>
-            </select>
+            {isSelected ? (
+              <select
+                id="stations"
+                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-700 focus:border-transparent appearance-none"
+              >
+                <option value="">Select a station</option>
+                {selectedRoutes.stations.map(
+                  (station: {
+                    id: React.Key | null | undefined;
+                    stationName:
+                      | string
+                      | number
+                      | boolean
+                      | React.ReactElement<
+                          any,
+                          string | React.JSXElementConstructor<any>
+                        >
+                      | React.ReactFragment
+                      | null
+                      | undefined;
+                  }) => (
+                    <option key={station.id}>{station.stationName}</option>
+                  ),
+                )}
+              </select>
+            ) : (
+              <select
+                id="stations"
+                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-700 focus:border-transparent appearance-none"
+                disabled
+              >
+                <option value="">Select a station</option>
+              </select>
+            )}
           </div>
         </div>
 
