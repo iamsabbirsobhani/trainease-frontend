@@ -196,6 +196,7 @@ export default function Form() {
               className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-700 focus:border-transparent"
               value={citiesTypingLetter}
               onChange={(e) => handleFrom(e)}
+              autoComplete="off"
             />
 
             {typingFrom ? (

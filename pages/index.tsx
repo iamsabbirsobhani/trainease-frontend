@@ -62,14 +62,21 @@ export default function Home() {
       </Head>
 
       <main className=" ">
-        <div className="max-w-5xl flex justify-between m-auto mt-10">
+        <div className="max-w-6xl flex justify-between m-auto mt-10">
           <div className="home-text w-1/2">
-            <h1 className=" text-5xl">Plan Your Next Train Journey</h1>
-            <p className="text-2xl">
-              <span>Search for Routes&nbsp;</span>
-              <span>Check Availability and Book Your Tickets Online</span>
+            <h1 className=" text-6xl font-bold text-gray-700">
+              Plan Your Next Train Journey
+            </h1>
+            <p className="text-2xl font-semibold mt-3">
+              <span className="text-blue-500">Search for Routes&nbsp;</span>
+              <span className="text-green-500">Check Availability&nbsp;</span>
+              <span className="text-orange-500">Book Your Tickets Online</span>
             </p>
-            <Link href="/search"> Search Ticket</Link>
+            <Link href="/search">
+              <button className="bg-sky-800 hover:bg-sky-900 font-bold py-2 px-4 rounded mt-5 text-gray-50">
+                Book Now
+              </button>
+            </Link>
           </div>
           <div className="home-bg w-1/2">
             <Image
@@ -80,6 +87,21 @@ export default function Home() {
               className=" rounded-md"
               blurDataURL="https://firebasestorage.googleapis.com/v0/b/general-eadd6.appspot.com/o/trainease%2Ftrain-bg.jpg?alt=media&token=35f96e04-32bc-48c6-917c-16e1c05d420f"
             />
+          </div>
+        </div>
+
+        <div className="w-full h-28 mt-9 bg-green-600 flex justify-center items-center">
+          <div className="flex justify-center flex-col items-center  m-14 text-gray-50 ">
+            <h1 className="font-bold text-4xl">100+ Million​​</h1>
+            <p className=" font-semibold text-xl">Tickets Sold</p>
+          </div>
+          <div className="flex justify-center flex-col items-center  m-14 text-gray-50 ">
+            <h1 className="font-bold text-4xl">3,000​</h1>
+            <p className=" font-semibold text-xl">Routes​​​</p>
+          </div>
+          <div className="flex justify-center flex-col items-center  m-14 text-gray-50 ">
+            <h1 className="font-bold text-4xl">5+ Million​​</h1>
+            <p className=" font-semibold text-xl">App Downloads​</p>
           </div>
         </div>
       </main>
