@@ -7,6 +7,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import styled from '@emotion/styled';
 import debounce from 'lodash/debounce';
 import CityList from './CityList';
+import axios from 'axios';
+import { API } from '@/api';
 
 export interface Station {
   id: number;
@@ -125,6 +127,14 @@ export default function Form() {
     setCityLoading(false);
   };
 
+  const getSelectedStationsRoute = async (fromStation: string) => {
+    try {
+      const stations = await axios.get(
+        API + `/getselectedstationsroute/fromstation/${fromStation}`,
+      );
+    } catch (error) {}
+  };
+
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,
@@ -202,12 +212,18 @@ export default function Form() {
             >
               To
             </label>
-            <StyledTextField
-              required
-              id="outlined-required"
-              label="Destination station"
-              defaultValue=""
-            />
+            <select
+              id="stations"
+              className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-700 focus:border-transparent appearance-none"
+              disabled
+            >
+              <option value="">Select a station</option>
+              <option value="volvo" className="">
+                Rangpur
+              </option>
+              <option value="saab">Kamalapur</option>
+              <option value="vw">Biman_Bandar</option>
+            </select>
           </div>
         </div>
 
