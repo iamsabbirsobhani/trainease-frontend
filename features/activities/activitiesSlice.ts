@@ -2,10 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ActivitiesSlice {
   selectedRoutes: any;
+  from: string;
+  to: string;
 }
 
 const initialState: ActivitiesSlice = {
   selectedRoutes: [],
+  from: '',
+  to: '',
 };
 
 export const ActivitiesSlice = createSlice({
@@ -15,9 +19,15 @@ export const ActivitiesSlice = createSlice({
     selectRoute: (state, action: PayloadAction<any>) => {
       state.selectedRoutes = action.payload;
     },
+    setFrom: (state, action: PayloadAction<string>) => {
+      state.from = action.payload;
+    },
+    setTo: (state, action: PayloadAction<string>) => {
+      state.to = action.payload;
+    },
   },
 });
 
-export const { selectRoute } = ActivitiesSlice.actions;
+export const { selectRoute, setFrom, setTo } = ActivitiesSlice.actions;
 
 export default ActivitiesSlice.reducer;

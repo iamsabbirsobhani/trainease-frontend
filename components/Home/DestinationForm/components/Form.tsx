@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import stationData from '@/public/stations.json';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { Button, TextField } from '@mui/material';
@@ -11,7 +11,11 @@ import axios from 'axios';
 import { API } from '@/api';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { RootState } from '@/store';
-import { selectRoute } from '@/features/activities/activitiesSlice';
+import {
+  selectRoute,
+  setFrom,
+  setTo,
+} from '@/features/activities/activitiesSlice';
 import { startOfToday, addDays } from 'date-fns';
 
 export interface Station {
@@ -33,6 +37,7 @@ export default function Form() {
   const selectedRoutes = useSelector(
     (state: RootState) => state.activities.selectedRoutes,
   );
+  const selectedTo = useSelector((state: RootState) => state.activities.to);
 
   const dispatch = useDispatch();
 
@@ -141,6 +146,10 @@ export default function Form() {
     setCityLoading(false);
   };
 
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setTo(event.target.value));
+  };
+
   const getSelectedStationsRoute = async (fromStation: string) => {
     try {
       const stations = await axios.get(
@@ -148,6 +157,7 @@ export default function Form() {
       );
       if (stations.data) setisSelected(true);
       dispatch(selectRoute(stations.data));
+      dispatch(setFrom(fromStation));
     } catch (error) {
       console.log(error);
       setisSelected(false);
@@ -177,7 +187,7 @@ export default function Form() {
   };
 
   return (
-    <div className="">
+    <div className=" ">
       <form action="">
         <div className=" flex justify-between items-center">
           <div className="from flex flex-col w-[300px] mb-2 relative">
@@ -235,6 +245,7 @@ export default function Form() {
             </label>
             {isSelected ? (
               <select
+                onChange={handleSelectChange}
                 id="stations"
                 className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-700 focus:border-transparent appearance-none"
               >
@@ -245,16 +256,12 @@ export default function Form() {
                     stationName:
                       | string
                       | number
-                      | boolean
-                      | React.ReactElement<
-                          any,
-                          string | React.JSXElementConstructor<any>
-                        >
-                      | React.ReactFragment
-                      | null
+                      | readonly string[]
                       | undefined;
                   }) => (
-                    <option key={station.id}>{station.stationName}</option>
+                    <option key={station.id} value={station.stationName}>
+                      {station.stationName}
+                    </option>
                   ),
                 )}
               </select>

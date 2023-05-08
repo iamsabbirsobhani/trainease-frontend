@@ -45,12 +45,30 @@ export default function Navbar() {
 
         <div className=" flex justify-between relative right-5">
           <div>
-            <Link href="/login">
-              <Button>Sign In</Button>
+            <Link href="/">
+              <button className="  text-green-800 p-2 text-lg hover:before:border-b-2 ">
+                Home
+              </button>
             </Link>
           </div>
           <div>
-            <Button>Sign Up</Button>
+            <Link href="/login">
+              <button className="  text-green-800 p-2 text-lg hover:before:border-b-2 ">
+                Login
+              </button>
+            </Link>
+          </div>
+          <div>
+            <button className="  text-green-800 p-2 text-lg hover:before:border-b-2 ">
+              Register
+            </button>
+          </div>
+          <div>
+            <Link href="/">
+              <button className="text-green-800 p-2 text-lg hover:before:border-b-2 ">
+                Contact Us
+              </button>
+            </Link>
           </div>
         </div>
       </div>

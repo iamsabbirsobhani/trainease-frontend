@@ -84,6 +84,7 @@ export default function Home() {
               alt="Picture of the author"
               width={500}
               height={500}
+              priority={true}
               className=" rounded-md"
               blurDataURL="https://firebasestorage.googleapis.com/v0/b/general-eadd6.appspot.com/o/trainease%2Ftrain-bg.jpg?alt=media&token=35f96e04-32bc-48c6-917c-16e1c05d420f"
             />
